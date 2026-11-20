@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef2f5;
+    --card: #ffffff;
+    --text: #17252b;
+    --muted: #5b6b73;
+    --line: #d3dce1;
+    --brand: #0f6b63;
+    --brand-dark: #0b524c;
+    --brand-soft: #e0f1ee;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1a1e;
+      --card: #172429;
+      --text: #e8f0f2;
+      --muted: #93a6ad;
+      --line: #2c3f46;
+      --brand: #3fb5a8;
+      --brand-dark: #6fd0c5;
+      --brand-soft: #1b3a38;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .card {
+    width: 100%;
+    max-width: 640px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 36px 32px;
+  }
+  h1 { margin: 0 0 6px; font-size: 1.7rem; font-weight: 700; }
+  .sub { margin: 0 0 28px; color: var(--muted); font-size: .95rem; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; }
+  .full { grid-column: 1 / -1; }
+  label.lbl, .lbl {
+    display: block;
+    margin-bottom: 6px;
+    font-size: .88rem;
+    font-weight: 600;
+  }
+  input[type="text"], input[type="password"], input[type="email"],
+  select, textarea {
+    width: 100%;
+    padding: 11px 13px;
+    font: inherit;
+    color: var(--text);
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  textarea { resize: vertical; min-height: 84px; }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-soft);
+  }
+  /* Radio + checkbox as selectable chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip span {
+    display: inline-block;
+    padding: 9px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    font-size: .92rem;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .chip input:checked + span {
+    background: var(--brand-soft);
+    border-color: var(--brand);
+    color: var(--brand-dark);
+    font-weight: 600;
+  }
+  .chip input:focus-visible + span { box-shadow: 0 0 0 3px var(--brand-soft); border-color: var(--brand); }
+  /* File input */
+  input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    font: inherit;
+    font-size: .9rem;
+    color: var(--muted);
+    border: 1.5px dashed var(--line);
+    border-radius: 10px;
+    background: transparent;
+  }
+  input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 14px;
+    font: inherit;
+    font-weight: 600;
+    color: var(--brand-dark);
+    background: var(--brand-soft);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .actions { display: flex; gap: 12px; margin-top: 28px; }
+  .btn {
+    padding: 12px 26px;
+    font: inherit;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .btn-primary { flex: 1; color: #fff; background: var(--brand); border: 1.5px solid var(--brand); }
+  .btn-primary:hover { background: var(--brand-dark); border-color: var(--brand-dark); }
+  @media (prefers-color-scheme: dark) { .btn-primary { color: #0b1a1c; } }
+  .btn-ghost { color: var(--muted); background: transparent; border: 1.5px solid var(--line); }
+  .btn-ghost:hover { background: var(--bg); }
+  .btn:focus-visible { outline: 3px solid var(--brand-soft); outline-offset: 2px; }
+  @media (max-width: 520px) {
+    .card { padding: 26px 20px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Create your account</h1>
+    <p class="sub">Fill in your details to register.</p>
+
+    <form action="register" method="post" enctype="multipart/form-data">
+      <div class="grid">
+        <div>
+          <label class="lbl" for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div>
+          <label class="lbl" for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com">
+        </div>
+
+        <div>
+          <label class="lbl" for="pass">Password</label>
+          <input type="password" id="pass" name="pass" placeholder="Create a password">
+        </div>
+        <div>
+          <label class="lbl" for="city">City</label>
+          <select id="city" name="city">
+            <option>Delhi</option>
+            <option>Lucknow</option>
+          </select>
+        </div>
+
+        <div>
+          <span class="lbl">Gender</span>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="g" value="M"><span>Male</span></label>
+            <label class="chip"><input type="radio" name="g" value="F"><span>Female</span></label>
+          </div>
+        </div>
+        <div>
+          <span class="lbl">Hobbies</span>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="h" value="coding"><span>Coding</span></label>
+            <label class="chip"><input type="checkbox" name="h" value="music"><span>Music</span></label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label class="lbl" for="addr">Address</label>
+          <textarea id="addr" name="addr" rows="3" placeholder="House no., street, area"></textarea>
+        </div>
+
+        <div class="full">
+          <label class="lbl" for="photo">Photo</label>
+          <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+      </div>
+
+      <div class="actions">
+        <input class="btn btn-primary" type="submit" value="Register">
+        <input class="btn btn-ghost" type="reset" value="Clear">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
